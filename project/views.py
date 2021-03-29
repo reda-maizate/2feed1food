@@ -2,18 +2,17 @@ from . import app
 from flask import render_template
 import matplotlib.pyplot as plt
 
+import plotly.express as px
+
 def test():
-    data = [1,2,3,2,5]
-    data2 = [2,4,3,6,6]
-    return print(type(plt.plot(data,data2)))
+    
+#     df = px.data.gapminder().query("country=='Canada'")
+#     fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
+    return ""
 
 
-
-
-
-
-def test2():
-    return render_template("index.html")
+def homePage():
+    return render_template("index.twig")
 
 
 @app.route('/test')
@@ -23,10 +22,7 @@ def index():
 
 
 
-@app.route('/test2')
+@app.route('/')
 def index2():
-    return test2()
-
-
-
+    return homePage()
 
