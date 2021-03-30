@@ -1,12 +1,30 @@
-version: "3.7"
+version: '3'
 
 services:
-
-  flask:
-    build: ./flask
-    container_name: flask
-    restart: always
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    container_name: elasticsearch
     environment:
-      - APP_NAME=MyFlaskApp
-    expose:
-      - 5050
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/mongo:/data/db
+    ports:
+      - 27017:27017
+  web:
+    build: .
+    ports:
+        - "5000:5000"
+    volumes:
+        - .:/code
+    depends_on:
+        - elastic
+        - mongo
