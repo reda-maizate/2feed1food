@@ -1,28 +1,18 @@
 from . import app
-from flask import render_template
-import matplotlib.pyplot as plt
-
-import plotly.express as px
-
-def test():
-    
-#     df = px.data.gapminder().query("country=='Canada'")
-#     fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
-    return ""
-
-
-def homePage():
-    return render_template("index.twig")
+from .python.homepage import homePage
+from .python.ajax.test import *
+from flask import request
 
 
 @app.route('/test')
-def index():
+def test():
     return test()
 
-
-
-
 @app.route('/')
-def index2():
+def home():
     return homePage()
 
+
+@app.route('/test4', methods=['POST'])
+def test4():
+    return noName(request)
