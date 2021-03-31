@@ -5,6 +5,11 @@ name = "pypi"
 
 [packages]
 flask = "*"
+elasticsearch = "*"
+pymongo = "*"
+numpy = "*"
+pandas = "*"
+matplotlib = "*"
 
 [dev-packages]
 
