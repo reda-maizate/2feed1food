@@ -8,10 +8,8 @@ WORKDIR ${PROJECT_DIR}
 
 COPY . .
 
-RUN  pip install --upgrade pip &&  pip install pipenv && pipenv install --skip-lock
+RUN  pip install -r requirements.txt
 
-EXPOSE 5000
+ENTRYPOINT ["python"]
 
-ENV FLASK_APP=run.py
-
-CMD ["pipenv", "run", "flask", "run", "-h", "0.0.0.0"]
+CMD ["run.py"]
