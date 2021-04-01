@@ -85,4 +85,3 @@ $('#ajaxSubmit').on('click', function(){
         }
     })
 });
-
