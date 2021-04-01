@@ -11,4 +11,4 @@ __pycache__/
 
 
 /node_modules/
-/project/dist/
+/project/static/assets/

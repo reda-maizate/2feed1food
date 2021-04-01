@@ -19,7 +19,9 @@
   "dependencies": {
     "bootstrap": "^5.0.0-beta3",
     "bootstrap-icons": "^1.4.1",
+    "chalk": "^2.4.2",
     "chart.js": "^2.9.4",
+    "chartjs": "^0.3.24",
     "gulp-less": "^4.0.1",
     "jquery": "^3.6.0"
   },

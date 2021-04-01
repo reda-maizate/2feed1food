@@ -1,19 +1,20 @@
 const gulp = require("gulp");
-const { series } = require('gulp');
+const {series} = require('gulp');
 const plugins = require('gulp-load-plugins')();
+const chalk = require('chalk');
 
 const inputFiles = './project/static/';
-const outputFiles = './project/dist/assets/';
+const outputFiles = './project/static/assets/';
 
 
-gulp.task('minifyJS' ,function(){
+gulp.task('minifyJS', function () {
     return gulp.src(inputFiles + 'js/*.js')
         .pipe(plugins.uglify())
         .pipe(plugins.concat('app.min.js'))
         .pipe(gulp.dest(outputFiles + 'js/'));
 });
 
-gulp.task('minifyCSS' , function (){
+gulp.task('minifyCSS', function () {
     return gulp.src(inputFiles + 'css/*.css')
         .pipe(plugins.less())
         .pipe(plugins.autoprefixer())
@@ -21,18 +22,42 @@ gulp.task('minifyCSS' , function (){
         .pipe(gulp.dest(outputFiles + 'css/'));
 });
 
-gulp.task('noTaskGiven',function (){
-    console.log("Vous n'avez pas renseigné de tache,je vous conseille gulp build");
+gulp.task('default', async function () {
+    console.log(chalk.keyword('orange')("Vous n'avez pas renseigné de tache,je vous conseille gulp build"));
+    console.log();
+    console.log();
+    console.log();
+
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
     gulp.watch(inputFiles + 'css/*.css', gulp.series('minifyCSS'));
     gulp.watch(inputFiles + 'js/*.js', gulp.series('minifyJS'));
 });
 
 
-exports.default = 'noTaskGiven';
-exports.minify = series('minifyCSS','minifyJS');
-exports.watch = 'watch';
+gulp.task('buildAssetsJS', function () {
+    return gulp.src([
+        'node_modules/bootstrap/dist/js/bootstrap.js',
+    ])
+        .pipe(plugins.concat('assets.min.js'))
+        .pipe(gulp.dest(outputFiles + 'js/'));
+});
 
-exports.build = series(exports.minify , exports.watch);
+gulp.task('buildAssetsCSS', function () {
+    return gulp.src([
+        'node_modules/bootstrap/dist/css/bootstrap.css',
+        'node_modules/chart.js/dist/Chart.bundle.js',
+        'node_modules/jquery/dist/jquery.js',
+    ])
+        .pipe(plugins.less())
+        .pipe(plugins.autoprefixer())
+        .pipe(plugins.concat('assets.min.css'))
+        .pipe(gulp.dest(outputFiles + 'css/'));
+});
+
+exports.minify = series('minifyCSS', 'minifyJS');
+exports.watch = 'watch';
+exports.buildAssets = series('buildAssetsCSS', 'buildAssetsJS');
+
+exports.build = series(exports.minify /*, exports.buildAssets ,*/, exports.watch);
