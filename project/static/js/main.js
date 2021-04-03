@@ -1,7 +1,7 @@
-let ctx = document.getElementById('myChart1');
-let ctx2 = document.getElementById('myChart2');
+let ctx = $('#myChart1');
+let ctx2 = $('#myChart2');
 
-let ctx3 = document.getElementById('myChart3');
+let ctx3 = $('#myChart3');
 
 const values = [1,2,3,2,3,4,2];
 
