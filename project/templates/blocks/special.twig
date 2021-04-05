@@ -1,17 +1,43 @@
-<div class="container">
+
+
+<div class="container ">
+
     <div class='row'>
+        <div class='col'></div>
+
+        <div class='col'>
+            <div class='d-inline'>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="smallAside">Produit</span>
+                    </div>
+                    <input type="text" class="form-control"  id='ajaxSearch' placeholder="pomme , poire..." aria-label="Username" aria-describedby="smallAside">
+                    <div class="input-group-append">
+                        <input type="submit" class="form-control" value='envoyer' id='ajaxSubmit'>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    
+        <div class='col'></div>
+
+    </div>
+
+    <div class='row d-none searchBlock'>
         <div class='col-2'></div>
 
         <div class='col-8'>
-             <div class="card shadow">
-                <div class="card-body">
-                    <input type='search' id='ajaxSearch' placeholder='pomme, poire...'></input>
-                    <input type='submit' id='ajaxSubmit' value='Rechercher'></input>
                     
-                    <canvas id="myChart3" width="200" height="200"></canvas>
+            <div class="card shadow">
+                <div class="card-body">
+                   
+                    
+                    <canvas id="myChart3"></canvas>
                     <div id="eheh"></div>
                 </div>
             </div>
+
+            <input type="submit" class="form-control" value='efface' id='ajaxErase'>
         </div>
 
         <div class='col-2'></div>

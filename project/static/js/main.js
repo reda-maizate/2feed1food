@@ -1,15 +1,80 @@
 let ctx = $('#myChart1');
 let ctx2 = $('#myChart2');
 
-let ctx3 = $('#myChart3');
-
-const values = [1,2,3,2,3,4,2];
-
-let myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: values,
-    options: {},
+let ajaxChart = new Chart($("#myChart3"),
+{ 
+    data: {
+        labels: [],
+        datasets: [],
+    },
+    type: 'bar',
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+    
 });
+
+$('#ajaxSubmit').on('click', function(){
+    ajaxChart.labels = [];
+    ajaxChart.data.datasets = [];
+    
+    $(".searchBlock").addClass('foundBlock').removeClass('d-none searchBlock');
+
+    $.ajax({
+        type: 'POST',
+        url: 'test4',
+        data: {
+            param : $("#ajaxSearch").val(),
+        },
+        
+        success: function(response){
+            ajaxChart.data.labels = response.labels;
+            ajaxChart.data.datasets.push(response.data);
+
+            ajaxChart.update();
+        }
+    })
+});
+
+$("#ajaxErase").on('click' , function(){
+    console.log("yep");
+    $(".foundBlock").addClass('d-none searchBlock').removeClass('foundBlock');
+
+    ajaxChart.data.labels = [];
+    ajaxChart.data.datasets = [];
+
+    ajaxChart.update();
+});
+
+const labels = ['lun', 'mar' , 'mer' , 'jeu' , 'ven' , 'sam' , 'dim'];
+const data = {
+    labels: labels,
+    datasets: [{
+      label: 'My First Dataset',
+      data: [65, 59, 80, 81, 56, 55, 40],
+      fill: false,
+      borderColor: 'rgb(75, 192, 192)',
+      tension: 0.1
+    }]
+}
+const config = {
+    type: 'line',
+    data: data,
+};
+
+var myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {}
+});
+
+
 
 
 const values2 = [3,4,1,2,3,2,2];
@@ -49,39 +114,4 @@ let myChart = new Chart(ctx2, {
             }]
         }
     }
-});
-
-
-$('#ajaxSubmit').on('click', function(){
-    $.ajax({
-        type: 'POST',
-        url: 'test4',
-        data: {
-            param : $("#ajaxSearch").val(),
-        },
-        
-        success: function(response){
-            new Chart($("#myChart3"),
-            { 
-                type: 'bar',
-                data: {
-                    labels:  response.cols,
-                    datasets: [{
-                        label: 'prices',
-                        data: response.data,
-                    }],
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-                
-            });
-        }
-    })
 });

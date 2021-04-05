@@ -1,3 +1,4 @@
+{% import "macros.twig" as macros %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,89 +12,69 @@
     <link rel="stylesheet" href=" {{ url_for('static' , filename='assets/css/app.min.css') }}">
 </head>
 <body class="p-0">
-{% block header %}
-    {% include 'blocks/header.twig' %}
-{% endblock %}
+{% include 'blocks/header.twig' %}
 
-{% block main %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
-                <div class="card shadow-lg">
-                    <div class="card-header">
-                        Parfois faut se calmer
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Les fruits débarquent sur le web!</h5>
-                        <p class="card-text">Venez tester ce tout nouvel outil!!</p>
-                    </div>
+{{ macros.separator() }}
 
+{% include 'blocks/description.twig' %}
+
+{{ macros.separator() }}
+
+{% include 'blocks/special.twig' %}
+
+
+{{ macros.separator() }}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card shadow">
+                <div class="card-body">
+                    This is some text within a card body.
                 </div>
             </div>
-            <div class="col-2"></div>
-        </div>
-    </div>
-
-    <div class="m-4">
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <div class="card shadow">
-                    <div class="card-body">
-                        This is some text within a card body.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm"></div>
-
-            <div class="col-sm">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
-        <div class="m-4"></div>
+        <div class="col-sm"></div>
 
-        <div class="row">
-            <div class="col-sm">
-                <div class="card shadow">
-                    <canvas id="myChart1" width="400" height="400"></canvas>
+        <div class="col-sm">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
                 </div>
             </div>
-
-            <div class="col-sm"></div>
-
-            <div class="col-sm">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <canvas id="myChart2" width="400" height="400"></canvas>
-                    </div>
-                </div>
-            </div>
-
         </div>
+
     </div>
 
-    <div class="m-4 p-4"></div>
-{% endblock %}
+    <div class="m-4"></div>
 
-{% block special %}
-    {% include 'blocks/special.twig' %}
-{% endblock %}
+    <div class="row">
+        <div class="col-sm">
+            <div class="card shadow">
+                <canvas id="myChart1" width="400" height="400"></canvas>
+            </div>
+        </div>
 
+        <div class="col-sm"></div>
+
+        <div class="col-sm">
+            <div class="card shadow">
+                <div class="card-body">
+                    <canvas id="myChart2" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="m-4 p-4"></div>
 
 
 {% block footer %}

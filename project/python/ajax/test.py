@@ -15,10 +15,15 @@ def noName(request):
         dataSet = [ i + 3 for i in dataSet]
         dataCols = ['one' , 'two' , 'three' , 'four' , 'five']
     elif data == 'fraise':
-        dataSet = [1 for i in range (5)]
+        dataSet = [i for i in range (5)]
         dataCols = ['a' , 'b' , 'c' , 'd' , 'e']
 
     return {
-        'data' : dataSet,
-        'cols' : dataCols
+        'labels' : dataCols,
+        'data' : {
+            'data' : dataSet,
+            'label' : 'test',
+            'backgroundColor' : '#3AF'
+        }
+
     }
