@@ -9,6 +9,5 @@ __pycache__/
 # PyCharm files
 .idea/
 
-
 /node_modules/
 /project/static/assets/
