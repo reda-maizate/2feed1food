@@ -1,6 +1,9 @@
 from . import app
 from .python.homepage import homePage
 from .python.ajax.test import *
+from .python.mongo.mongo import *
+from flask import render_template
+
 
 
 @app.route('/test')
@@ -17,4 +20,9 @@ def test4():
 
 @app.route('/nosql')
 def hello_word():
-    return "Hello world"
+    return "Hello non"
+
+@app.route('/get')
+def mongotest():
+    res = get()
+    return render_template("testmongo.html", res=res)

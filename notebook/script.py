@@ -2,13 +2,12 @@ import pymongo  # package for working with MongoDB
 from bson import json_util
 import json
 
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient("mongodb://mongo:27017/")
 db = client["test"]
 collections = db["data"]
 
-print(db.collections.count_documents())
-# with open('2feed1food-data.json', 'r') as myfile:
-    # file=myfile.read()
+with open('2feed1food-data.json', 'r') as myfile:
+    file=myfile.read()
 
-# data = json.loads(file)
-# db.collections.insert_many(data)
+data = json.loads(file)
+db.collections.insert_many(data)
