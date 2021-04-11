@@ -43,8 +43,9 @@ def search_results():
     a = es1.search(index="test", body={
                                        "from": 0, "size": 5,
                                         "query": {
-                                            "match":
-                                                {"product_name": query,
+                                            "query_string":
+                                                {"default_field": "product_name",
+                                                 "query":f"*{query}*",
                                                  }
                                         }
     })

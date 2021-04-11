@@ -4,13 +4,14 @@ from elasticsearch import Elasticsearch
 import pprint
 from tqdm import tqdm
 import warnings
+
 warnings.filterwarnings("ignore")
 
 client = MongoClient("mongodb://mongo:27017/")
 db = client["test"]
 collections = db["data"]
 
-es1 = Elasticsearch(hosts="elasticsearch")
+es1 = Elasticsearch(hosts="elasticsearch", timeout=30, max_retries=10, retry_on_timeout=True)
 
 print("Connected to", es1.info())
 
@@ -34,4 +35,4 @@ request_body = {
 }
 
 es1.indices.create(index='test', body=request_body, ignore=400)
-res = es1.bulk(index="test", body=actions, refresh=True)
+es1.bulk(index="test", body=actions, refresh=True)
