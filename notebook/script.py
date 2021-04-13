@@ -7,7 +7,7 @@ db = client["test"]
 collections = db["data"]
 
 with open('2feed1food-data.json', 'r') as myfile:
-    file=myfile.read()
+    file = myfile.read()
 
 data = json.loads(file)
 db.collections.insert_many(data)

@@ -1,6 +1,6 @@
 FROM python:3.7.7
 
-RUN pip3 install pipenv
+RUN pip install --upgrade pip
 
 ENV PROJECT_DIR /code
 
