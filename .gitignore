@@ -11,4 +11,6 @@ __pycache__/
 
 /node_modules/
 /project/static/assets/
+
+# Mongo Database
 data/mongo
