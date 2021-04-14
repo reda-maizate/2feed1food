@@ -1,8 +1,8 @@
 from . import app
-from flask import render_template, jsonify, request
+from flask import render_template, request
 
 from .python.homepage import homePage
-from .python.mongoosastic.mongoosastic import *
+from notebook.mongoosastic.mongoosastic import *
 from .python.ajax.searchBar import *
 
 
@@ -39,7 +39,7 @@ def ajax_search():
 def search_results():
     query = request.args.get('q')
     a = es1.search(index="test", body={
-        "from": 0, "size": 5,
+        "from": 0, "size": 15,
         "query": {
             "query_string": {
                 "default_field": "product_name",
