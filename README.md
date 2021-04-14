@@ -21,6 +21,17 @@ Run the next command:
 - `docker-compose up -d --build`
 - `gulp build`
 
+### Download the data
+To use the project, you'll need to do these next steps:
+- Run on your command line: `docker exec -it {name of the web container, in my case: 2feed1food_web_1} bash`
+- Then run: `python notebook/mongoDB/install-light.py` to get the light version of the data or `python notebook/mongoDB/install-big.py`to get the full version of the data.
+- Exit from the `docker exec` by running on the command line: `exit`.
+- Run on your command line: `docker exec -it {name of the mongo container, in my case: mongo} bash`
+- Then: `mongorestore /data/db/mongo/dump`.
+- Finally, relaunch the docker, to be sure that the data are synchronized to the two database (Mongo and Elastic). 
+
+You have succesfully downloaded the data required to the project.
+
 ### Enjoy
 Go to your favorite search browser and run this URL:
 - `http://localhost:5000/index`
