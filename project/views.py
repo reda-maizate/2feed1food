@@ -38,7 +38,7 @@ def ajax_search():
 # Accés par la page /index?q
 def search_results():
     query = request.args.get('q')
-    a = es1.search(index="test", body={
+    a = es1.search(index="off_collections", body={
         "from": 0, "size": 15,
         "query": {
             "query_string": {
