@@ -24,13 +24,8 @@ Run the next command:
 ### Download the data
 To use the project, you'll need to do these next steps:
 - Run on your command line: `docker exec -it {name of the web container, in my case: 2feed1food_web_1} bash`
-- Then run: `python notebook/init.py -light` to get the light version of the data or `python notebook/init.py -full` (*not available yet*) to get the full version of the data.
+- Then run: `python notebook/init.py -light` to get the light version of the data or `python notebook/init.py -full` to get the full version of the data.
 - To start the sync between Mongo and ElasticSearch, run the command: `mongo-connector -m mongo:27017 -t elasticsearch:9200 -d 'elastic7_doc_manager'`
-
-Follow the 3 next command, **only** if you choosed the **full version** of the data.
-- Run on another command line: `docker exec -it {name of the mongo container, in my case: mongo} bash`
-- Then: `mongorestore /data/db/mongo/dump`.
-- Finally, relaunch the docker, to be sure that the data are synchronized to the two database (Mongo and Elastic). 
 
 You have succesfully downloaded the data required to the project.
 
