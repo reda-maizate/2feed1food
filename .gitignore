@@ -13,5 +13,8 @@ __pycache__/
 /project/static/assets/
 
 # Mongo Database
-data/mongo
+data/
 /dump/
+
+mongo-connector.log
+oplog.*

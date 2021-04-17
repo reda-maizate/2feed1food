@@ -19,10 +19,6 @@ services:
       - ./data/mongo:/data/db
     ports:
       - 27017:27017
-    healthcheck:
-      test: test $$(echo "rs.initiate().ok || rs.status().ok") -eq 1
-      interval: 10s
-      start_period: 30s
     command: ["--replSet", "replica0"]
   web:
     build: .
