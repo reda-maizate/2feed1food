@@ -35,21 +35,6 @@ Go to your favorite search browser and run this URL:
 
 And enjoy. :)
 
-cd {WORKDIR}
-
-docker-compose up
-### Getting set up
-
-|  Tool  | Command |
-|:---  |   ---:   | 
-|  `git blabla` | bonsoir |
-|   ---  |   ---   |
-
-
-
-### Frequently Used
-
-
 authors :
 [Réda MAIZATE](https://github.com/reda-maizate)
 [Thomas Tresgots](https://github.com/Taumah)
