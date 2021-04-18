@@ -13,7 +13,15 @@
             <div class="card mb-2">
                 <div class="card-body">
                     <h5 class="card-title">{{ project["_source"]["product_name"] }}</h5>
-                    <p class="card-text">{{ project["_source"]["brands"] }}</p>
+                    {% if project["_source"]["image_url"] != null %}
+                      <img class="card-text" src={{ project["_source"]["image_url"] }}>
+                    {% endif %}
+                    {% for info in project["_source"] %}
+                      {% if (project["_source"][info] != "null") and
+                        (info not in ["image_url", "image_small_url"]) %}
+                        <p class="card-text">{{ info.capitalize().replace("_", " ").replace("-", " ") }}: {{ project["_source"][info] }}</p>
+                      {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
