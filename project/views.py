@@ -33,19 +33,28 @@ def ajax_search():
 
 #### Second version working with Elasticsearch
 
-@app.route("/index", methods=["POST", "GET"])
+@app.route("/index")
+def index():
+    return render_template("index2.twig" , projects={})
+
+@app.route("/index/post", methods=["POST"])
 # Accés par la page /index?q
 def search_results():
+    query_fields = ["image_url", "ingredients_text", "product_name"]
+    data_cols = ['brands', 'product_name', 'fat_100g', 'carbohydrates_100g', 'sugars_100g', 'fiber_100g',
+                 'proteins_100g', 'salt_100g', 'nutrition-score-fr_100g', 'nutrition-score-uk_100g']
+
     query = request.args.get('q')
     a = es1.search(index="off_collections", body={
-        "from": 0, "size": 20,
+        "from": 0, "size": 10,
         "query": {
             "query_string": {
-                "fields": ["image_url", "ingredients_text", "product_name"],
+                "fields": query_fields,
                 "query": f"*{query}*",
             }
         },
-
+        "fields": data_cols,
+        "_source": False,
     })
 
     return render_template("index2.twig", projects=a)

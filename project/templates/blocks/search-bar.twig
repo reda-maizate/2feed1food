@@ -7,19 +7,21 @@
       </form>
     </nav>
 
+
+
     <div class="row">
-    {% for project in projects["hits"]["hits"] %}
+    {% for doc in projects["hits"]["hits"] %}
         <div class="col-md-4">
             <div class="card mb-2">
                 <div class="card-body">
-                    <h5 class="card-title">{{ project["_source"]["product_name"] }}</h5>
-                    {% if project["_source"]["image_url"] != null %}
-                      <img class="card-text" src={{ project["_source"]["image_url"] }}>
+                    <h5 class="card-title">{{ doc["fields"]["product_name"][0] }}</h5>
+                    {% if doc["fields"]["image_url"] != null %}
+                      <img class="card-text" src={{ doc["fields"]["image_url"][0] }}>
                     {% endif %}
-                    {% for info in project["_source"] %}
-                      {% if (project["_source"][info] != "null") and
+                    {% for info in doc["fields"] %}
+                      {% if (doc["fields"][info][0] != "null") and
                         (info not in ["image_url", "image_small_url"]) %}
-                        <p class="card-text">{{ info.capitalize().replace("_", " ").replace("-", " ") }}: {{ project["_source"][info] }}</p>
+                        <p class="card-text">{{ info.capitalize().replace("_", " ").replace("-", " ") }}: {{ doc["fields"][info][0] }}</p>
                       {% endif %}
                     {% endfor %}
                 </div>
