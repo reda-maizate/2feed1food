@@ -48,7 +48,7 @@ def search_results():
     query = request.form.get('query')
 
     a = es1.search(index="off_collections", body={
-        "from": 0, "size": 10,
+        "from": 0, "size": 15,
         "query": {
             "query_string": {
                 "fields": query_fields,
