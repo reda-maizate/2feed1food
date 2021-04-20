@@ -1,1 +1,16 @@
-{% extends 'base2.twig' %}
+{% extends 'base.twig' %}
+{% block article %}
+    {% include "blocks/search-bar.twig" %}
+{% endblock %}
+
+{% block main %}
+<div id="context"></div>
+{% endblock %}
+
+{% block misc %}
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ url_for('static',filename='assets/js/searchBar.js') }}"></script>
+{% endblock %}

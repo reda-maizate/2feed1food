@@ -35,7 +35,8 @@ def ajax_search():
 
 @app.route("/index")
 def index():
-    return render_template("index2.twig" , projects={})
+    return render_template("index2.twig", projects={})
+
 
 @app.route("/index/post", methods=["POST"])
 # Accés par la page /index?q
@@ -44,7 +45,8 @@ def search_results():
     data_cols = ['brands', 'product_name', 'fat_100g', 'carbohydrates_100g', 'sugars_100g', 'fiber_100g',
                  'proteins_100g', 'salt_100g', 'nutrition-score-fr_100g', 'nutrition-score-uk_100g']
 
-    query = request.args.get('q')
+    query = request.form.get('query')
+
     a = es1.search(index="off_collections", body={
         "from": 0, "size": 10,
         "query": {
@@ -57,4 +59,4 @@ def search_results():
         "_source": False,
     })
 
-    return render_template("index2.twig", projects=a)
+    return render_template("blocks/search-bar-result.twig", projects=a)
