@@ -10,6 +10,7 @@ pymongo = "*"
 numpy = "*"
 pandas = "*"
 matplotlib = "*"
+tqdm = "*"
 
 [dev-packages]
 

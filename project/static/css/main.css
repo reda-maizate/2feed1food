@@ -1,4 +1,17 @@
-body {
+body{
     padding: 60px 0;
     background: #ffffff;
+}
+
+
+.searchBlock .card-body {
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
+    overflow: hidden;
+    background: #d5d5d5;
+}
+
+.foundBlock .card-body {
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
 }

@@ -8,3 +8,14 @@ __pycache__/
 
 # PyCharm files
 .idea/
+
+/node_modules/
+/project/static/assets/
+
+# Mongo Database
+data/
+/dump/
+
+mongo-connector.log
+oplog.*
+/mongo-connector.log.2021-04-17

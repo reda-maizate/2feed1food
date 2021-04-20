@@ -1,0 +1,7 @@
+2021-04-18 01:25:54,644 [ALWAYS] mongo_connector.connector:50 - Starting mongo-connector version: 3.1.1
+2021-04-18 01:25:54,654 [ALWAYS] mongo_connector.connector:50 - Python version: 3.7.7 (default, Jun  9 2020, 17:58:51) 
+[GCC 8.3.0]
+2021-04-18 01:25:54,655 [ALWAYS] mongo_connector.connector:50 - Platform: Linux-5.4.72-microsoft-standard-WSL2-x86_64-with-debian-10.4
+2021-04-18 01:25:54,655 [ALWAYS] mongo_connector.connector:50 - pymongo version: 3.11.3
+2021-04-18 01:25:54,665 [ALWAYS] mongo_connector.connector:50 - Source MongoDB version: 4.0.23
+2021-04-18 01:25:54,667 [ALWAYS] mongo_connector.connector:50 - Target DocManager: mongo_connector.doc_managers.elastic7_doc_manager version: 1.0.1.dev36+g569e9d2
