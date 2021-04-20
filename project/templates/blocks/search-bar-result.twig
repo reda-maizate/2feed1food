@@ -1,0 +1,33 @@
+<div class="container">
+
+    <nav class="navbar navbar-light justify-content-center">
+      <form class="form-inline" method="get">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search" name="q">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </nav>
+
+</div>
+<div class="container">
+    <div class="row">
+    {% for doc in projects["hits"]["hits"] %}
+        <div class="col-md-4">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ doc["fields"]["product_name"][0] }}</h5>
+                    {% if doc["fields"]["image_url"] != null %}
+                      <img class="card-text" src={{ doc["fields"]["image_url"][0] }}>
+                    {% endif %}
+                    {% for info in doc["fields"] %}
+                      {% if (doc["fields"][info][0] != "null") and
+                        (info not in ["image_url", "image_small_url"]) %}
+                        <p class="card-text">{{ info.capitalize().replace("_", " ").replace("-", " ") }}: {{ doc["fields"][info][0] }}</p>
+                      {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
