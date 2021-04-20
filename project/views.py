@@ -39,10 +39,10 @@ def ajax_search():
 def search_results():
     query = request.args.get('q')
     a = es1.search(index="off_collections", body={
-        "from": 0, "size": 15,
+        "from": 0, "size": 20,
         "query": {
             "query_string": {
-                "default_field": "product_name",
+                "fields": ["ingredients_text", "product_name"],
                 "query": f"*{query}*",
             }
         }
