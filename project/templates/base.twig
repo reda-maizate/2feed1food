@@ -18,21 +18,16 @@
 
 {{ macros.separator() }}
 
-<<<<<<< HEAD
-{% include 'blocks/search-bar.twig' %}
-=======
+
 {% block article %}
 {% include 'blocks/description.twig' %}
 {% endblock %}
->>>>>>> c8ca4d8571a1bcbf61a5f93aea0e80b2f6615585
 
 {{ macros.separator() }}
 {% block main %}
 {% include 'blocks/special.twig' %}
-<<<<<<< HEAD
-=======
+
 {% endblock %}
->>>>>>> c8ca4d8571a1bcbf61a5f93aea0e80b2f6615585
 
 {{ macros.separator() }}
 
@@ -91,7 +86,6 @@
 
 {% include 'blocks/footer.twig' %}
 
-<canvas id="avoidErrors"></canvas>
 <script src="{{ url_for('static',filename='assets/js/assets.min.js') }}" ></script>
 {% block javascripts %}
 <script src="{{ url_for('static',filename='assets/js/main.js') }}"></script>
