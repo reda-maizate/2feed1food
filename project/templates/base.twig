@@ -10,18 +10,18 @@
     <title>2 Feed 1 Food</title>
     <link rel="stylesheet" href="{{ url_for('static' , filename='assets/css/assets.min.css') }}">
     <link rel="stylesheet" href=" {{ url_for('static' , filename='assets/css/app.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 </head>
 <body class="p-0">
 {% include 'blocks/header.twig' %}
 
 {{ macros.separator() }}
 
-{% include 'blocks/description.twig' %}
+{% include 'blocks/search-bar.twig' %}
 
 {{ macros.separator() }}
 
 {% include 'blocks/special.twig' %}
-
 
 {{ macros.separator() }}
 

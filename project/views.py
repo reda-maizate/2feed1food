@@ -1,20 +1,14 @@
 from . import app
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 
-from .python.homepage import homePage
 from notebook.mongoosastic.mongoosastic import *
 from .python.ajax.searchBar import *
 
-
+"""
 @app.route('/')
 def home():
-    return homePage()
-
-
-@app.route('/nosql')
-def hello_word():
-    return "Hello non"
-
+    return render_template("index.twig")
+"""
 
 @app.route('/get', methods=["POST", "GET"])
 def ajax_search():
@@ -22,23 +16,10 @@ def ajax_search():
     # return render_template("testmongo.html", res='')
     return get_item(res)
 
-
-#### First version is working with Mongo
-
-# @app.route("/index", methods=["GET"])
-# def search_results():
-#     query = request.args.get('q')
-#     projects = db.collections.find({"product_name": query}).limit(5)
-#     print(projects)
-#     return render_template("index2.twig", projects=projects)
-
-#### Second version working with Elasticsearch
-
-@app.route("/index", methods=["POST", "GET"])
-# Accés par la page /index?q
+@app.route("/", methods=["POST", "GET"])
 def search_results():
     query = request.args.get('q')
-    a = es1.search(index="off_collections", body={
+    results = es1.search(index="off_collections", body={
         "from": 0, "size": 20,
         "query": {
             "query_string": {
@@ -47,4 +28,4 @@ def search_results():
             }
         }
     })
-    return render_template("index2.twig", projects=a)
+    return render_template("index.twig", results=results)
