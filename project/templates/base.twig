@@ -11,20 +11,28 @@
 
     <link rel="stylesheet" href="{{ url_for('static' , filename='assets/css/assets.min.css') }}">
     <link rel="stylesheet" href=" {{ url_for('static' , filename='assets/css/app.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 </head>
 <body class="p-0">
 {% include 'blocks/header.twig' %}
 
 {{ macros.separator() }}
 
+<<<<<<< HEAD
+{% include 'blocks/search-bar.twig' %}
+=======
 {% block article %}
 {% include 'blocks/description.twig' %}
 {% endblock %}
+>>>>>>> c8ca4d8571a1bcbf61a5f93aea0e80b2f6615585
 
 {{ macros.separator() }}
 {% block main %}
 {% include 'blocks/special.twig' %}
+<<<<<<< HEAD
+=======
 {% endblock %}
+>>>>>>> c8ca4d8571a1bcbf61a5f93aea0e80b2f6615585
 
 {{ macros.separator() }}
 
