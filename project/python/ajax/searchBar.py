@@ -7,8 +7,6 @@ from numpy import *
 import pymongo
 
 from notebook.mongoosastic.mongoosastic import es1
-
-
 def random_color():
     random_number = random.randint(0, 16777215)
     hex_number = str(hex(random_number))
