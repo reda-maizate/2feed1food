@@ -9,10 +9,12 @@ from .python.ajax.searchBar import *
 def home():
     return render_template("index.twig")
 
+
 @app.route('/get', methods=["POST", "GET"])
 def ajax_search():
     res = request.form.get('param')
     return get_item(res)
+
 
 #### First version is working with Mongo
 
@@ -34,7 +36,7 @@ def index():
 # Accés par la page /index?q
 def search_results():
     query_fields = ["image_url", "ingredients_text", "product_name"]
-    data_cols = ['brands', 'product_name', 'fat_100g', 'carbohydrates_100g', 'sugars_100g', 'fiber_100g',
+    data_cols = ['image_url', 'brands', 'product_name', 'fat_100g', 'carbohydrates_100g', 'sugars_100g', 'fiber_100g',
                  'proteins_100g', 'salt_100g', 'nutrition-score-fr_100g', 'nutrition-score-uk_100g']
 
     query = request.form.get('query')
@@ -48,6 +50,6 @@ def search_results():
             }
         },
         "fields": data_cols,
-        "_source": False,
     })
+
     return render_template("blocks/search-bar-result.twig", projects=a)

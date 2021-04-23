@@ -1,43 +1,12 @@
 <div class="container">
 
 
-  <nav class="navbar navbar-light justify-content-center">
-    <form class="form-inline" method="get">
-
-    <div class="row">
-        <div class="col-md-8 mt-4 mb-5">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search" name="q">
-        </div>
-        <div class="col-md-4 mb-5 mt-4">
-          <button class="btn btn-outline-success mr-sm-2" type="submit">Search</button>
-        </div>
-    </div>
-
-    </form>
-  </nav>
-
-  <div class="row">
-    {% for result in results["hits"]["hits"] %}
-    <div class="col-md-4">
-      <div class="card">
-      <img class="card-img-top" src={{result["_source"]["image_url"] }}>
-      <div class="card-body">
-        <h5 class="card-title">{{ result["_source"]["product_name"] }}</h5>
-        <i class="card-text">{{ result["_source"]["brands"] }}</i>
-      </div>
-      <ul class="list-group list-group-flush">
-        {% for info in result["_source"] %}
-          {% if (result["_source"][info] != "null") and (info not in ["image_url", "image_small_url", "product_name", "brands"]) %}
-
-          {% if (result["_source"][info] != "null") and (info not in ["image_url", "image_small_url", "product_name", "brands"]) %}
-            <li class="list-group-item">{{ info.capitalize().replace("_", " ").replace("-", " ") }}: {{ result["_source"][info] }}</li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-    </div>
-    {% endfor %}
-  </div>
-
+    <nav class="navbar navbar-light justify-content-center">
+        <form class="form-inline" onsubmit="return false">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search"
+                   id="searchQuery">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="searchBar">Search</button>
+        </form>
+    </nav>
 
 </div>

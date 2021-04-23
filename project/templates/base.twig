@@ -18,11 +18,16 @@
 
 {{ macros.separator() }}
 
-{% include 'blocks/search-bar.twig' %}
+
+{% block article %}
+{% include 'blocks/description.twig' %}
+{% endblock %}
 
 {{ macros.separator() }}
 {% block main %}
 {% include 'blocks/special.twig' %}
+
+{% endblock %}
 
 {{ macros.separator() }}
 
@@ -81,7 +86,6 @@
 
 {% include 'blocks/footer.twig' %}
 
-<canvas id="avoidErrors"></canvas>
 <script src="{{ url_for('static',filename='assets/js/assets.min.js') }}" ></script>
 {% block javascripts %}
 <script src="{{ url_for('static',filename='assets/js/main.js') }}"></script>
