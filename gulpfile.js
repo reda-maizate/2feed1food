@@ -14,7 +14,6 @@ gulp.task('minifyJS', function () {
         inputFiles + 'js/*.js'
     ])
         .pipe(plumber())
-        .pipe(plugins.concat('main.js'))
         .pipe(gulp.dest(outputFiles + 'js/'));
 });
 

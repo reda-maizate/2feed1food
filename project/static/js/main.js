@@ -19,8 +19,7 @@ let ajaxChart = new Chart($("#myChart3"),
 });
 
 $('#ajaxSubmit').on('click', function(){
-    ajaxChart.labels = [];
-    ajaxChart.data.datasets = [];
+    removeData(ajaxChart);
     
     $(".searchBlock").addClass('foundBlock').removeClass('d-none searchBlock');
 
@@ -32,9 +31,10 @@ $('#ajaxSubmit').on('click', function(){
         },
         
         success: function(response){
-            ajaxChart.data.labels = response.labels;
-            ajaxChart.data.datasets.push(response.data);
+            // ajaxChart.data.labels = response.labels;
+            // ajaxChart.data.datasets.push(response.data[0]);
 
+            addData(ajaxChart , response.labels , response.data)
             ajaxChart.update();
         }
     })
@@ -44,8 +44,24 @@ $("#ajaxErase").on('click' , function(){
     console.log("yep");
     $(".foundBlock").addClass('d-none searchBlock').removeClass('foundBlock');
 
-    ajaxChart.data.labels = [];
-    ajaxChart.data.datasets = [];
-
-    ajaxChart.update();
+    removeData(ajaxChart);
 });
+
+
+function addData(chart, labels, data) {
+    chart.data.labels = labels;
+
+    for (let i = 0 ; i < data.length ; i++) {
+        console.log(data[i]);
+        chart.data.datasets.push(data[i]);
+    }
+
+    chart.update();
+}
+
+function removeData(chart) {
+    chart.data.labels = [];
+    chart.data.datasets = [];
+
+    chart.update();
+}

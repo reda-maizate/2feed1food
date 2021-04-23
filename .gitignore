@@ -18,3 +18,4 @@ data/
 
 mongo-connector.log
 oplog.*
+/mongo-connector.log.2021-04-17
