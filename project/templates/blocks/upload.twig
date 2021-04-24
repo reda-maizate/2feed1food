@@ -1,0 +1,24 @@
+<div class="container" id="Container1">
+   <div class="row">
+     <div class="col-sm-6 text-center d-flex align-items-center" id="FileUpload">
+       <form method="post" enctype="multipart/form-data" action="predictImage">
+         <label for="fname">Upload an image of your dish:</label>
+         <div class="d-flex align-items-center">
+           <div class="input-group" style="margin:auto;">
+             <input class="btn btn-secondary" name="filePath" type="file">
+           </div>
+         </div>
+         <input class="btn btn-primary mt-2" type="submit" value="Submit">
+     </div>
+
+     <div class="col-sm-6 text-center" id="Submit">
+         <p><strong>The dish in your file is: {{prediction_label}}</strong></p>
+         <img src={{ image }} alt='picture-of-dish-uploaded' height='250px' weight='250px'>
+         <br>
+         <p><strong>Prediction accuracy: {{prediction_score}}%</strong></p>
+         <p><i>Labels available: {{labels}}</i></p>
+         <p><i>Scores: {{scores}}</i></p>
+       </form>
+     </div>
+   </div>
+ </div>

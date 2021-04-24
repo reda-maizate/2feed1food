@@ -16,17 +16,6 @@ def ajax_search():
     return get_item(res)
 
 
-#### First version is working with Mongo
-
-# @app.route("/index", methods=["GET"])
-# def search_results():
-#     query = request.args.get('q')
-#     projects = db.collections.find({"product_name": query}).limit(5)
-#     print(projects)
-#     return render_template("index2.twig", projects=projects)
-
-#### Second version working with Elasticsearch
-
 @app.route("/index")
 def index():
     return render_template("index2.twig", projects={})
@@ -53,3 +42,8 @@ def search_results():
     })
 
     return render_template("blocks/search-bar-result.twig", projects=a)
+
+
+@app.route("/ai")
+def ai():
+    return render_template("ai.twig")
