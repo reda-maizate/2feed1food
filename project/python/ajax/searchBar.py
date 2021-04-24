@@ -16,7 +16,9 @@ def random_color():
     return hex_number
 
 
-def get_item(param):
+def get_item(request):
+
+    param = request.form.get('param')
     data_cols = ['fat_100g', 'carbohydrates_100g', 'sugars_100g', 'fiber_100g', 'proteins_100g', 'salt_100g',
                  'nutrition-score-fr_100g', 'nutrition-score-uk_100g']
     res = es1.search(index="off_collections", body={
@@ -31,7 +33,6 @@ def get_item(param):
         "_source": False,
     })
 
-    # return json.dumps(res)
     jsonData = {'labels': data_cols, 'data': []}
 
     if len(res) > 1:
