@@ -2,9 +2,31 @@
 
 
     <nav class="navbar navbar-light justify-content-center">
-        <form class="form-inline" onsubmit="return false">
+        <form class="form-inline" onsubmit="return false" id="esForm">
             <input class="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search"
                    id="searchQuery">
+
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="calorific" name="energy_100g" asc_or_desc="desc">
+                <label class="form-check-label" for="calorific">Calories Hautes</label>
+            </div>
+
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="healthify" name="nutrition-score-fr_100g" asc_or_desc="desc">
+                <label class="form-check-label" for="healthify">Healthy</label>
+            </div>
+
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gluten_free" word="gluten" with="false">
+                <label class="form-check-label" for="gluten_free">Sans Gluten</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="milk_free" word="milk" with="false">
+                <label class="form-check-label" for="healthify">Sans Lactose</label>
+            </div>
+
             <button class="btn btn-outline-success my-2 my-sm-0" id="searchBar">Search</button>
         </form>
     </nav>
