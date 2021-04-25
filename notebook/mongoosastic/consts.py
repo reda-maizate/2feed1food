@@ -1,0 +1,2 @@
+EShost = 'elasticsearch'
+Mhost = 'mongo'
