@@ -8,6 +8,7 @@
                     {% if doc["fields"]["image_url"] != null %}
                       <img class="card-text" src={{ doc["fields"]["image_url"][0] }}>
                     {% endif %}
+                    <a class="card-text" href="/product/alone?doc={{ doc['_id'] }}" target="_blank">Lien détails</a>
                     {% for info in doc["fields"] %}
                       {% if (doc["fields"][info][0] != "null") and
                         (info not in ["image_url", "image_small_url"]) %}
