@@ -1,24 +1,23 @@
 <div class="container">
-    <div class="row">
-    {% for doc in projects["hits"]["hits"] %}
-        <div class="col-md-4">
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">{{ doc["fields"]["product_name"][0] }}</h5>
-                    {% if doc["fields"]["image_url"] != null %}
-                      <img class="card-text" src={{ doc["fields"]["image_url"][0] }}>
-                    {% endif %}
-                    <a class="card-text" href="/product/alone?doc={{ doc['_id'] }}" target="_blank">Lien détails</a>
-                    {% for info in doc["fields"] %}
-                      {% if (doc["fields"][info][0] != "null") and
-                        (info not in ["image_url", "image_small_url"]) %}
-                        <p class="card-text">{{ info.capitalize().replace("_", " ").replace("-", " ") }}: {{ doc["fields"][info][0] }}</p>
-                      {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
+  <div class="row">
+  {% for doc in projects["hits"]["hits"] %}
+    <div class="col-md-4">
+      <div class="card">
+        <img class="card-img-top" src={{ doc["fields"]["image_url"][0] if doc["fields"]["image_url"] }}>
+        <div class="card-body">
+        <h5 class="card-title">{{ doc["fields"]["product_name"][0] }}</h5>
+        <i class="card-text">{{ doc["fields"]["brands"][0] if doc["fields"]["brands"] }}</i>
+        <a class="card-text" href="/product/alone?doc={{ doc['_id'] }}" target="_blank">Lien détails</a>
         </div>
-        {% endfor %}
+        <ul class="list-group list-group-flush">
+          {% for info in doc["fields"] %}
+            {% if (doc["fields"][info] != "null") and (info not in ["image_url", "image_small_url", "product_name", "brands"]) %}
+              <li class="list-group-item">{{ info.capitalize().replace("_", " ").replace("-", " ") }}: {{ doc["fields"][info][0] }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-
+  {% endfor %}
+  </div>
 </div>

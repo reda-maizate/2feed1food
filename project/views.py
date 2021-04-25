@@ -6,12 +6,9 @@ from flask import render_template, request, redirect, url_for, session
 from notebook.mongoosastic.mongoosastic import *
 from .python.ajax.searchBar import *
 
-app.secret_key = 'any random string'
-
 
 @app.route('/')
 def home():
-    session['key'] = 'test'
     return render_template("index.twig")
 
 
@@ -19,17 +16,6 @@ def home():
 def ajax_search():
     return get_item(request)
 
-
-#### First version is working with Mongo
-
-# @app.route("/index", methods=["GET"])
-# def search_results():
-#     query = request.args.get('q')
-#     projects = db.collections.find({"product_name": query}).limit(5)
-#     print(projects)
-#     return render_template("index2.twig", projects=projects)
-
-#### Second version working with Elasticsearch
 
 @app.route("/index")
 def index():
@@ -47,7 +33,6 @@ def search_results():
     optionsOrder = {}
 
     optionsRemove = {}
-    # return json.dumps(dict(request.form.items()))
     for column in request.form:
         if column != 'query':
             specification = request.form.get(column)
@@ -81,45 +66,14 @@ def search_results():
         "_source": False,
     })
 
+
     if a['hits']['total']['value'] <= 0:
         return "Aucune correspondance trouvée"
     return render_template("blocks/search-bar-result.twig", projects=a)
 
-# {
-#     "bool": {
-#         "must":     { "match": "fox"         },
-#         "should":   { "match": "quick brown" },
-#         "must_not": { "match": "news"        }
-#     }
-# }
 
-# {
-# "query": {
-#     "bool": {
-#         "must": {
-#             "query_string": {
-#                 "fields": query_fields,
-#                 "query": f"*" + query + "*",
-#             },
-#         },
-#         "must_not": {
-#             "term": {"ingredients_text": "gluten"},
-#         }
-#     }
-# }
-# }
 
-# "query": {
-#          "query_string": {
-#              "fields": query_fields,
-#              "query": f"*" + query + "*",
-#          },
-#          # "bool": {
-#          #     "must": {
-#          #         "term": {"product_name": query},
-#          #     },
-#          #     "must_not": {
-#          #         "term": {"ingredients_text": "gluten"},
-#          #     }
-#          # }
-#      },
+
+@app.route("/ai")
+def ai():
+    return render_template("ai.twig")
