@@ -1,14 +1,17 @@
 import json
 
 from . import app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 
 from notebook.mongoosastic.mongoosastic import *
 from .python.ajax.searchBar import *
 
+app.secret_key = 'any random string'
+
 
 @app.route('/')
 def home():
+    session['key'] = 'test'
     return render_template("index.twig")
 
 
@@ -34,10 +37,10 @@ def index():
 
 
 @app.route("/index/post", methods=["POST"])
-# Accés par la page /index?q
 def search_results():
     query_fields = ["ingredients_text", "product_name"]
-    data_cols = ['ingredients_text', 'brands', 'product_name', 'fat_100g', 'carbohydrates_100g', 'sugars_100g', 'fiber_100g',
+    data_cols = ['ingredients_text', 'brands', 'product_name', 'fat_100g', 'carbohydrates_100g', 'sugars_100g',
+                 'fiber_100g',
                  'proteins_100g', 'salt_100g', 'nutrition-score-fr_100g', 'nutrition-score-uk_100g', 'energy_100g']
     query = request.form.get('query')
 
@@ -56,23 +59,30 @@ def search_results():
     a = es1.search(index="off_collections", body={
         "from": 0, "size": 15,
         "query": {
-            "query_string": {
-                "fields": query_fields,
-                "query": f"*"+query+"*",
-            },
-            # "bool": {
-            #     "must": {
-            #         "term": {"product_name": query},
-            #     },
-            #     "must_not": {
-            #         "term": {"ingredients_text": "gluten"},
-            #     }
-            # }
+            "bool": {
+                "must": {
+                    "query_string": {
+                        "fields": query_fields,
+                        "query": f"*" + query + "*",
+                    },
+                },
+                "must_not": [
+                    {
+                        "term": {"ingredients_text": "gluten"},
+                    },
+                    # {
+                    #     "term": {"ingredients_text": "lait"},
+                    # }
+                ]
+            }
         },
         "sort": optionsOrder,
         "fields": data_cols,
         "_source": False,
     })
+
+    if a['hits']['total']['value'] <= 0:
+        return "Aucune correspondance trouvée"
     return render_template("blocks/search-bar-result.twig", projects=a)
 
 # {
@@ -82,3 +92,34 @@ def search_results():
 #         "must_not": { "match": "news"        }
 #     }
 # }
+
+# {
+# "query": {
+#     "bool": {
+#         "must": {
+#             "query_string": {
+#                 "fields": query_fields,
+#                 "query": f"*" + query + "*",
+#             },
+#         },
+#         "must_not": {
+#             "term": {"ingredients_text": "gluten"},
+#         }
+#     }
+# }
+# }
+
+# "query": {
+#          "query_string": {
+#              "fields": query_fields,
+#              "query": f"*" + query + "*",
+#          },
+#          # "bool": {
+#          #     "must": {
+#          #         "term": {"product_name": query},
+#          #     },
+#          #     "must_not": {
+#          #         "term": {"ingredients_text": "gluten"},
+#          #     }
+#          # }
+#      },
