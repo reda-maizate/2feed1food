@@ -33,7 +33,7 @@ def search_results():
     optionsOrder = {}
 
     optionsRemove = {}
-    # return json.dumps(dict(request.form.items()))
+    #return json.dumps(dict(request.form.items()))
     for column in request.form:
         if column != 'query':
             specification = request.form.get(column)
@@ -45,31 +45,30 @@ def search_results():
     a = es1.search(index="off_collections", body={
         "from": 0, "size": 15,
         "query": {
-            "query_string": {
-                "fields": query_fields,
-                "query": f"*"+query+"*",
-            },
-            # "bool": {
-            #     "must": {
-            #         "term": {"product_name": query},
-            #     },
-            #     "must_not": {
-            #         "term": {"ingredients_text": "gluten"},
-            #     }
-            # }
+            "bool": {
+                "must": {
+                    "query_string": {
+                        "fields": query_fields,
+                        "query": f"*" + query + "*",
+                    },
+                },
+                "must_not": {
+                    "term": {"ingredients_text": "*gluten*"},
+                }
+            }
         },
         "sort": optionsOrder,
         "fields": data_cols,
+        "_source": False,
     })
 
     return render_template("blocks/search-bar-result.twig", projects=a)
 
-<<<<<<< HEAD
 
 @app.route("/ai")
 def ai():
     return render_template("ai.twig")
-=======
+
 # {
 #     "bool": {
 #         "must":     { "match": "fox"         },
@@ -77,4 +76,3 @@ def ai():
 #         "must_not": { "match": "news"        }
 #     }
 # }
->>>>>>> 679e8a2919c53a4ea66e757f6008a09bdbbe0f15
