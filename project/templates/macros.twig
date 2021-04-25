@@ -1,3 +1,12 @@
 {% macro separator() %}
     <div class="m-4"></div>
 {% endmacro %}
+
+
+{% macro need_eng_g(key) %}
+    {% set txt = '' %}
+    {% if '_100g' in key %}
+        {% set txt = ' g' %}
+    {% endif %}
+    {{ txt }}
+{% endmacro %}

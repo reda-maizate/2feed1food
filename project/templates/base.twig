@@ -20,66 +20,15 @@
 
 
 {% block article %}
-{% include 'blocks/description.twig' %}
 {% endblock %}
 
 {{ macros.separator() }}
 {% block main %}
-{% include 'blocks/special.twig' %}
-
 {% endblock %}
 
 {{ macros.separator() }}
 
 {% block misc %}
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <div class="card shadow">
-                <div class="card-body">
-                    This is some text within a card body.
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm"></div>
-
-        <div class="col-sm">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="m-4"></div>
-
-    <div class="row">
-        <div class="col-sm">
-            <div class="card shadow">
-                <canvas id="myChart1" width="400" height="400"></canvas>
-            </div>
-        </div>
-
-        <div class="col-sm"></div>
-
-        <div class="col-sm">
-            <div class="card shadow">
-                <div class="card-body">
-                    <canvas id="myChart2" width="400" height="400"></canvas>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
 {% endblock %}
 {{ macros.separator() }}
 
@@ -88,7 +37,6 @@
 
 <script src="{{ url_for('static',filename='assets/js/assets.min.js') }}" ></script>
 {% block javascripts %}
-<script src="{{ url_for('static',filename='assets/js/main.js') }}"></script>
 {% endblock %}
 </body>
 </html>

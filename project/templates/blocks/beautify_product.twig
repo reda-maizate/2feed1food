@@ -1,0 +1,13 @@
+{% import "macros.twig" as macros %}
+{% extends 'base.twig' %}
+
+{% block misc %}
+    <ul>
+        {% for key,info in product.items() %}
+            {% set extra = macros.need_eng_g(key) %}
+            <li>{{ key.capitalize() }} : {{ info }} {{ extra }}</li>
+
+        {% endfor %}
+    </ul>
+{% endblock %}
+
