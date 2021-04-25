@@ -5,6 +5,7 @@ from flask import render_template, request, redirect, url_for, session
 
 from notebook.mongoosastic.mongoosastic import *
 from .python.ajax.searchBar import *
+from .python.ajax.search_specs import *
 
 
 @app.route('/')
@@ -23,57 +24,49 @@ def index():
 
 
 @app.route("/index/post", methods=["POST"])
-def search_results():
-    query_fields = ["ingredients_text", "product_name"]
-    data_cols = ['ingredients_text', 'brands', 'product_name', 'fat_100g', 'carbohydrates_100g', 'sugars_100g',
-                 'fiber_100g',
-                 'proteins_100g', 'salt_100g', 'nutrition-score-fr_100g', 'nutrition-score-uk_100g', 'energy_100g']
-    query = request.form.get('query')
-
-    optionsOrder = {}
-
-    optionsRemove = {}
-    for column in request.form:
-        if column != 'query':
-            specification = request.form.get(column)
-            if specification in ['asc', 'desc']:
-                optionsOrder[column] = specification
-            if specification in [True, False]:
-                optionsRemove[column] = specification
-
-    a = es1.search(index="off_collections", body={
-        "from": 0, "size": 15,
-        "query": {
-            "bool": {
-                "must": {
-                    "query_string": {
-                        "fields": query_fields,
-                        "query": f"*" + query + "*",
-                    },
-                },
-                "must_not": [
-                    {
-                        "term": {"ingredients_text": "gluten"},
-                    },
-                    # {
-                    #     "term": {"ingredients_text": "lait"},
-                    # }
-                ]
-            }
-        },
-        "sort": optionsOrder,
-        "fields": data_cols,
-        "_source": False,
-    })
-
-
-    if a['hits']['total']['value'] <= 0:
-        return "Aucune correspondance trouvée"
-    return render_template("blocks/search-bar-result.twig", projects=a)
-
-
+def search_specs_route():
+    return search_specs(request)
 
 
 @app.route("/ai")
 def ai():
     return render_template("ai.twig")
+
+
+@app.route("/product/alone", methods=["GET"])
+def get_product():
+    id = request.args.get('doc')
+
+    product = es1.search(index="off_collections", body={
+        "query": {
+            "ids": {
+                "values": [str(id)],
+            }
+        }
+    })
+    # return json.dumps(product)
+    return render_template('blocks/beautify_product.twig', product=product['hits']['hits'][0]['_source'])
+
+
+@app.route("/max")
+def get_max():
+    # collections.create_index([("nutrition_grade_fr", 1)])
+    col = collections.find().sort([("nutrition_grade_fr", -1)])
+
+    for doc in col:
+        return json.dumps(doc)
+
+# index="off_collections", body={
+#         "from": 300, "size": 10,
+#         "sort": [
+#             {
+#                 "nutrition_grade_fr": "desc",
+#             },
+#             {
+#                 "nutrition-score-fr_100g": "desc",
+#             },
+#             {
+#                 "nutrition-score-uk_100g": "desc",
+#             }
+#         ]
+#     })
