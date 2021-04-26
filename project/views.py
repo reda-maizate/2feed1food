@@ -4,7 +4,7 @@ from flask import request
 from notebook.mongoosastic.mongoosastic import *
 from .python.ajax.searchBar import *
 from .python.ajax.search_specs import *
-from python.GET.get_product import *
+from .python.GET.get_product import *
 
 
 @app.route('/')
