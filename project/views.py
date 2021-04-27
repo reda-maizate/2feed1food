@@ -31,6 +31,10 @@ def search_specs_route():
 def ai_route():
     return render_template("ai.twig")
 
+@app.route("/predict")
+def predict():
+    return render_template("ai.twig")
+
 
 @app.route("/product/alone", methods=["GET"])
 def get_product_route():
