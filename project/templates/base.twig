@@ -35,7 +35,11 @@
 
 {% include 'blocks/footer.twig' %}
 
-<script src="{{ url_for('static',filename='assets/js/assets.min.js') }}" ></script>
+
+{% block helpers %}
+    <div class="modal-dialog modal-sm" id="myModal"></div>
+{% endblock %}
+<script src="{{ url_for('static',filename='assets/js/assets.min.js') }}"></script>
 {% block javascripts %}
 {% endblock %}
 </body>

@@ -1,58 +1,62 @@
-
-let ajaxChart = new Chart($("#myChart3"),
-{ 
-    data: {
-        labels: [],
-        datasets: [],
-    },
-    type: 'bar',
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+let canva = $("#myChart3");
+let ajaxChart = new Chart(canva,
+    {
+        data: {
+            labels: [],
+            datasets: [],
+        },
+        type: 'bar',
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
-    }
-    
-});
 
-$('#ajaxSubmit').on('click', function(){
+    });
+
+$('#ajaxSubmit').on('click', function (button) {
     removeData(ajaxChart);
-    
+
     $(".searchBlock").addClass('foundBlock').removeClass('d-none searchBlock');
 
     $.ajax({
         type: 'POST',
         url: 'get',
         data: {
-            param : $("#ajaxSearch").val(),
+            param: $("#ajaxSearch").val(),
         },
-        
-        success: function(response){
-            // ajaxChart.data.labels = response.labels;
-            // ajaxChart.data.datasets.push(response.data[0]);
 
-            addData(ajaxChart , response.labels , response.data)
-            ajaxChart.update();
+        success: function (response) {
+            if (response.hasOwnProperty('error') && response.error === true) {
+                $("#errorPlace").html(response.message);
+                hideCanva()
+            } else {
+                $("#errorPlace").html("");
+
+                addData(ajaxChart, response.labels, response.data)
+                ajaxChart.update();
+            }
         }
     })
 });
 
-$("#ajaxErase").on('click' , function(){
-    console.log("yep");
+$("#ajaxErase").on('click', hideCanva);
+
+
+function hideCanva() {
     $(".foundBlock").addClass('d-none searchBlock').removeClass('foundBlock');
 
     removeData(ajaxChart);
-});
-
+}
 
 function addData(chart, labels, data) {
     chart.data.labels = labels;
 
-    for (let i = 0 ; i < data.length ; i++) {
-        console.log(data[i]);
+    for (let i = 0; i < data.length; i++) {
         chart.data.datasets.push(data[i]);
     }
 

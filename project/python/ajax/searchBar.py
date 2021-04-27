@@ -5,7 +5,7 @@ import numpy
 from numpy import *
 
 import pymongo
-
+from flask import render_template
 from notebook.mongoosastic.mongoosastic import es1
 
 def random_color():
@@ -34,7 +34,7 @@ def get_item(request):
 
     jsonData = {'labels': data_cols, 'data': []}
 
-    if len(res) > 1:
+    if len(res['hits']['hits']) > 1:
         for row in res['hits']['hits']:
             jsonData['data'].append({
                 'data': list(numpy.array(list(row['fields'].values())).flatten()),
@@ -44,6 +44,6 @@ def get_item(request):
         return jsonData
     return {
         'error': True,
-        'message': 'No results found'
+        'message': "No results found...",
     }
 
