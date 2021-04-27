@@ -1,34 +1,21 @@
-<div class="container">
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8 card card-title">
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseN{{ header['_id'] }}" aria-expanded="false"
-                    aria-controls="collapseN{{ header['_id'] }}">
-                Catégorie Score <strong>{{ header['_id'] }}</strong>
-            </button>
+<div class="collapse" id="collapseN{{ header }}">
 
-            <div class="collapse" id="collapseN{{ header['_id'] }}">
-                <table class="table table-borderless table-striped table-hover">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col"> #</th>
-                        <th scope="col"> Product Name</th>
-                        <th scope="col"> Nutrition score</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for doc in cursor %}
-                        <tr>
-                            <td>{{ loop.index }} </td>
-                            <td><a class="btn" href="/product/alone?doc={{ doc['_id'] }}">{{ doc['product_name'] }} </a></td>
-                            <td>{{ doc['nutrition_grade_fr'] }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col-2"></div>
-    </div>
+    <table class="table table-striped table-bordered table-hover table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col"> #</th>
+            <th scope="col"> Product Name</th>
+            <th scope="col"> Nutrition score</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for doc in cursor %}
+            <tr>
+                <td>{{ loop.index }} </td>
+                <td><a class="btn" href="/product/alone?doc={{ doc['_id'] }}">{{ doc['product_name'] }} </a></td>
+                <td>{{ doc['nutrition_grade_fr'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>

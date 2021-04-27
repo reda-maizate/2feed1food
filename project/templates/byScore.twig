@@ -2,5 +2,22 @@
 
 
 {% block main %}
-    {{ html }}
+    <div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="mb-3">
+                {{ tableHeader }}
+            </div>
+            <div>
+                {{ tableContent }}
+            </div>
+        </div>
+
+        </div>
+
+        <div class="col-2"></div>
+    </div>
+
+</div>
 {% endblock %}
