@@ -2,12 +2,54 @@
 {% extends 'base.twig' %}
 
 {% block misc %}
-    <ul>
-        {% for key,info in product.items() %}
-            {% set extra = macros.need_eng_g(key) %}
-            <li>{{ key.capitalize() }} : {{ info }} {{ extra }}</li>
 
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="container ">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col border rounded-top rounded-2 border-3 border-bottom-0">
+                    <span class="text-danger">
+                        {{ product['product_name'].capitalize() }}
+                    </span><br>
+                    <span>Sold by {{ product['brands'] }}    </span>
+
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row">
+                <div class="col border rounded-start rounded-2 border-3 border-end-0">
+                    <ul>
+                        <li>Energy : {{ product['energy_100g'] }} j/100g</li>
+                        <li>Nutrition grade : {{ product['nutrition_grade_fr'].capitalize() }} /E</li>
+                        <li>Nutrition score : {{ product['nutrition-score-fr_100g'] }} /40</li>
+                    </ul>
+                </div>
+                <div class="col border border-3">
+                    <img src="{{ product['image_url'] }}" class="item"
+                         alt="No image found for {{ product['product_name'] }}">
+                </div>
+                <div class="col border rounded-end rounded-2 border-3 border-start-0">
+                    <ul>
+                        <li>Fat : {{ product['fat_100g'] }} g/100g</li>
+                        <li>Carbohydrates : {{ product['carbohydrates_100g'] }} g/100g</li>
+                        <li>Fiber : {{ product['fiber_100g'] }} g/100g</li>
+                        <li>Protein : {{ product['proteins_100g'] }} g/100g</li>
+                        <li>Salt : {{ product['salt_100g'] }} g/100g</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col border rounded-bottom rounded-2 border-3 border-top-0">
+                    <div class="overflow-scroll" style="height: 120px;width: fit-content;">
+                        <li>{{ '</li><li>'.join(product['ingredients_text'].split(', ')) }}</li>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}
 
