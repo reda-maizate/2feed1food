@@ -40,3 +40,10 @@ def get_product_route():
 @app.route("/score")
 def get_score_route():
     return group_by()
+
+
+@app.route("/score/ajax", methods=["POST"])
+def get_score_ajax_route():
+    grade = request.form.get("grade")
+    origin = request.form.get("origin")
+    return get_by_score(grade, int(origin))
