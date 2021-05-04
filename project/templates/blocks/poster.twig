@@ -5,6 +5,7 @@
         <tr>
             <th scope="col"> #</th>
             <th scope="col"> Product Name</th>
+            <th scope="col"> Product Brand</th>
             <th scope="col"> Nutrition score</th>
         </tr>
         </thead>
@@ -13,6 +14,7 @@
             <tr>
                 <td>{{ origin + loop.index }} </td>
                 <td><a class="btn" href="/product/alone?doc={{ doc['_id'] }}">{{ doc['product_name'] }} </a></td>
+                <td><a class="btn" href="/product/alone?doc={{ doc['_id'] }}">{{ doc['brands'] }} </a></td>
                 <td>{{ doc['nutrition_grade_fr'] }}</td>
             </tr>
         {% endfor %}
