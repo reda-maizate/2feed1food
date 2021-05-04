@@ -11,11 +11,17 @@
         <tbody>
         {% for doc in cursor %}
             <tr>
-                <td>{{ loop.index }} </td>
+                <td>{{ origin + loop.index }} </td>
                 <td><a class="btn" href="/product/alone?doc={{ doc['_id'] }}">{{ doc['product_name'] }} </a></td>
                 <td>{{ doc['nutrition_grade_fr'] }}</td>
             </tr>
         {% endfor %}
         </tbody>
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item" id="previous{{ header }}" data-origin="{{ origin }}" data-category="{{ header }}"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item" id="next{{ header }}" data-origin="{{ origin }}" data-category="{{ header }}"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
     </table>
 </div>
