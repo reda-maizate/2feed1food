@@ -35,13 +35,11 @@ Go to your favorite search browser and run this URL:
 
 And enjoy. :)
 
-### Link to raw data
-[openfoodfacts](https://www.kaggle.com/openfoodfacts/world-food-facts)
-
-other?
+### Link to data
+The dataset we used for this project is [OpenFoodFacts](https://www.kaggle.com/openfoodfacts/world-food-facts) from Kaggle.
 
 
-####authors :
+#### authors :
 [Réda MAIZATE](https://github.com/reda-maizate)
 [Thomas Tresgots](https://github.com/Taumah)
 
