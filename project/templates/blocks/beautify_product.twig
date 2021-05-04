@@ -11,7 +11,7 @@
                     <span class="text-danger">
                         {{ product['product_name'].capitalize() }}
                     </span><br>
-                    <span>Sold by {{ product['brands'] }}    </span>
+                    Sold by <p class="fst-italic d-inline"> {{ product['brands'] }}    </p>
 
                 </div>
                 <div class="col"></div>
@@ -30,18 +30,18 @@
                 </div>
                 <div class="col border rounded-end rounded-2 border-3 border-start-0">
                     <ul>
-                        <li>Fat : {{ product['fat_100g'] }} g/100g</li>
-                        <li>Carbohydrates : {{ product['carbohydrates_100g'] }} g/100g</li>
-                        <li>Fiber : {{ product['fiber_100g'] }} g/100g</li>
-                        <li>Protein : {{ product['proteins_100g'] }} g/100g</li>
-                        <li>Salt : {{ product['salt_100g'] }} g/100g</li>
+                        <li>Fat : {{ product['fat_100g'] |default("X", true) }} g/100g</li>
+                        <li>Carbohydrates : {{ product['carbohydrates_100g'] |default("X", true) }} g/100g</li>
+                        <li>Fiber : {{ product['fiber_100g'] |default("X", true) }} g/100g</li>
+                        <li>Protein : {{ product['proteins_100g'] |default("X", true) }} g/100g</li>
+                        <li>Salt : {{ product['salt_100g'] |default("X", true) }} g/100g</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col"></div>
                 <div class="col border rounded-bottom rounded-2 border-3 border-top-0">
-                    <div class="overflow-scroll" style="height: 120px;width: fit-content;">
+                    <div class="overflow-scroll" style="height: 120px;">
                         <li>{{ '</li><li>'.join(product['ingredients_text'].split(', ')) }}</li>
                     </div>
                 </div>
